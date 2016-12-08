@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CookingDescription">
+        <activity android:name=".AmericBlinchiki">
                 <action android:name="android.intent.action.MAIN" />
         </activity>
         <activity android:name=".AnanasSharlotka">

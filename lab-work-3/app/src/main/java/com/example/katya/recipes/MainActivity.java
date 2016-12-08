@@ -3,7 +3,6 @@ package com.example.katya.recipes;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -118,8 +117,8 @@ public class MainActivity extends Activity  {
     public static final Integer[] images = { R.drawable.bb1,R.drawable.bb2,R.drawable.bb3, R.drawable.bb4,R.drawable.bb5, R.drawable.bb6,
        R.drawable.bb7,R.drawable.bb8,R.drawable.v1,R.drawable.d1,R.drawable.pp1,R.drawable.k1,R.drawable.k2 };
 
-
-
+    ListView lview;
+    List<ItemDetails> Recipes;
 
 
     @Override
@@ -127,61 +126,32 @@ public class MainActivity extends Activity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-
-        List<ItemDetails>  Recipes = new ArrayList<ItemDetails>();
+        Recipes = new ArrayList<ItemDetails>();
         for (int i = 0; i < name.length; i++) {
            ItemDetails item = new ItemDetails(images[i], name[i], descriptions[i]);
             Recipes.add(item);
     }
-        ListView lview = (ListView) findViewById(R.id.lview);
-        DataAdapter adapter = new DataAdapter(this , Recipes);
+        lview = (ListView) findViewById(R.id.lview);
+        DataAdapter adapter = new DataAdapter(this, Recipes);
         lview.setAdapter(adapter);
-        Intent intent = new Intent(MainActivity.this, CookingDescription.class);
-
-        //ArrayList<ItemDetails> itemDetails = new ArrayList<ItemDetails>();
-
-        //intent.putExtra("Property",itemDetails );
-        //startActivity(intent);
-
-
-//        @Override
-//        public void onSaveInstanceState(final Bundle outState) {
-//            super.onSaveInstanceState(outState);
-//            outState.putParcelableArray("Recipes",Recipes);
-//        }
         //listView.setOnItemClickListener(this);
-        //lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-//
-//                if(position == 0)
-//                {
-//                    Intent myIntent = new Intent(view.getContext(), AmericPancake.class);
-//                    startActivityForResult(myIntent, 0);
-//                }
-//                else if(position == 1)
-//                {
-//                    Intent myIntent = new Intent(view.getContext(), AnanasSharlotka.class);
-//                    startActivityForResult(myIntent, 0);
-//                }
-//            }
-//        });
-//public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//    ItemDetails itemdetails = new ItemDetails(Integer.parseInt(images.toString()) ,name.toString(), descriptions.toString());
-//    Intent intent = new Intent(MainActivity.this, CookingDescription.class);
-//
-//    intent.putExtra("Property", itemdetails);
-//    startActivity(intent);
-//}
-//    public class Generator extends Activity {
-//        //в методе заполняем список своими данными
-//        public ArrayList<String> getData(){
-//            ArrayList<String> diseases = new ArrayList<>();
-//            diseases.add(getResources().getString(R.string.americ_pancake));
-//           // diseases.add(getResources().getString(R.string.arrhythmia_data));
-//           // diseases.add(getResources().getString(R.string.arthritis_data));
-//            //......
-//            return diseases;
-      }
+        lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 
-}
+                if(position == 0)
+                {
+                    Intent myIntent = new Intent(view.getContext(), AmericBlinchiki.class);
+                    startActivityForResult(myIntent, 0);
+                }
+                else if(position == 1)
+                {
+                    Intent myIntent = new Intent(view.getContext(), AnanasSharlotka.class);
+                    startActivityForResult(myIntent, 0);
+                }
+            }
+        });
+
+
+
+}}
