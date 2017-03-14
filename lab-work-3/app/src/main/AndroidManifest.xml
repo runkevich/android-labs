@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.katya.recipes">
-    <uses-permission android:name="android.permission.INTERNET"/>
+    package="com.example.katya.recipes" >
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo.Light" >
+        android:theme="@android:style/Theme.Holo.Light">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -17,9 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SecondActivity"
-            android:label="Description" >
+        <activity android:name=".CookingDescription">
+                <action android:name="android.intent.action.MAIN" />
+        </activity>
+        <activity android:name=".AnanasSharlotka">
+            <action android:name="android.intent.action.MAIN" />
         </activity>
     </application>
+
 </manifest>

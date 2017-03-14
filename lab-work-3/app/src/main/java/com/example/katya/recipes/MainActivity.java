@@ -2,35 +2,22 @@ package com.example.katya.recipes;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends Activity  {
-
-    private ArrayList<ItemDetails> recipes = new ArrayList<>();
-    public static String LOG_TAG = "my_log";
-
     public static final String[] name = new String[] { "Американские блинчики","Ананасовая шарлотка","Английский кекс",
             "Бананово-шоколадный кекс","Банановое печенье","Баница","Бельгийские пивные оладьи","Блины заварные на кефире",
             "Вафли","Домашнее мороженое","Имбирное печенье","Кекс в чашке","Клюквенный крисп"};
 
-    public static final String[] description = new String[] {
+    public static final String[] descriptions = new String[] {
             "Мука — 200 гр.\n" +
                     "Сахар — 2 ст.л.\n" +
                     "Сода — 1,5 ч.л.\n" +
@@ -129,108 +116,72 @@ public class MainActivity extends Activity  {
                     "Овсяная крупа — 2 стакана" };
 
     public static final Integer[] images = { R.drawable.bb1,R.drawable.bb2,R.drawable.bb3, R.drawable.bb4,R.drawable.bb5, R.drawable.bb6,
-            R.drawable.bb7,R.drawable.bb8,R.drawable.v1,R.drawable.d1,R.drawable.pp1,R.drawable.k1,R.drawable.k2 };
+       R.drawable.bb7,R.drawable.bb8,R.drawable.v1,R.drawable.d1,R.drawable.pp1,R.drawable.k1,R.drawable.k2 };
 
-    public ListView lview;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        new ParseTask().execute();
 
 
+        List<ItemDetails>  Recipes = new ArrayList<ItemDetails>();
         for (int i = 0; i < name.length; i++) {
-            ItemDetails item = new ItemDetails(images[i], name[i], description[i]);
-            recipes.add(item);
-        }
-        lview = (ListView) findViewById(R.id.lview);
-        final DataAdapter adapter = new DataAdapter(this, recipes);
+           ItemDetails item = new ItemDetails(images[i], name[i], descriptions[i]);
+            Recipes.add(item);
+    }
+        ListView lview = (ListView) findViewById(R.id.lview);
+        DataAdapter adapter = new DataAdapter(this , Recipes);
         lview.setAdapter(adapter);
+        Intent intent = new Intent(MainActivity.this, CookingDescription.class);
 
-        lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        //ArrayList<ItemDetails> itemDetails = new ArrayList<ItemDetails>();
 
-            ArrayList<ItemDetails> items = new ArrayList<>();
-            items.add(recipes.get(position));
+        //intent.putExtra("Property",itemDetails );
+        //startActivity(intent);
 
-            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-            intent.putExtra("description", recipes);
-            startActivity(intent);
-        }
 
-    });
-    }
-    private class ParseTask extends AsyncTask<Void, Void, String> {
+//        @Override
+//        public void onSaveInstanceState(final Bundle outState) {
+//            super.onSaveInstanceState(outState);
+//            outState.putParcelableArray("Recipes",Recipes);
+//        }
+        //listView.setOnItemClickListener(this);
+        //lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+//
+//                if(position == 0)
+//                {
+//                    Intent myIntent = new Intent(view.getContext(), AmericPancake.class);
+//                    startActivityForResult(myIntent, 0);
+//                }
+//                else if(position == 1)
+//                {
+//                    Intent myIntent = new Intent(view.getContext(), AnanasSharlotka.class);
+//                    startActivityForResult(myIntent, 0);
+//                }
+//            }
+//        });
+//public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//    ItemDetails itemdetails = new ItemDetails(Integer.parseInt(images.toString()) ,name.toString(), descriptions.toString());
+//    Intent intent = new Intent(MainActivity.this, CookingDescription.class);
+//
+//    intent.putExtra("Property", itemdetails);
+//    startActivity(intent);
+//}
+//    public class Generator extends Activity {
+//        //в методе заполняем список своими данными
+//        public ArrayList<String> getData(){
+//            ArrayList<String> diseases = new ArrayList<>();
+//            diseases.add(getResources().getString(R.string.americ_pancake));
+//           // diseases.add(getResources().getString(R.string.arrhythmia_data));
+//           // diseases.add(getResources().getString(R.string.arthritis_data));
+//            //......
+//            return diseases;
+      }
 
-        HttpURLConnection urlConnection = null;
-        BufferedReader reader = null;
-        String resultJson = "";
-
-        @Override
-        protected String doInBackground(Void... params) {
-            // получаем данные с внешнего ресурса
-            try {
-                URL url = new URL("http://androiddocs.ru/api/friends.json");
-
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("GET");
-                urlConnection.connect();
-
-                InputStream inputStream = urlConnection.getInputStream();
-                StringBuffer buffer = new StringBuffer();
-
-                reader = new BufferedReader(new InputStreamReader(inputStream));
-
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line);
-                }
-
-                resultJson = buffer.toString();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return resultJson;
-        }
-
-        @Override
-        protected void onPostExecute(String strJson) {
-            super.onPostExecute(strJson);
-            // выводим целиком полученную json-строку
-            Log.d(LOG_TAG, strJson);
-
-            JSONObject dataJsonObj = null;
-            String secondName = "";
-
-            try {
-                dataJsonObj = new JSONObject(strJson);
-                JSONArray friends = dataJsonObj.getJSONArray("friends");
-
-                // 1. достаем инфо о втором друге - индекс 1
-                JSONObject secondFriend = friends.getJSONObject(1);
-                secondName = secondFriend.getString("name");
-                Log.d(LOG_TAG, "Второе имя: " + secondName);
-
-                // 2. перебираем и выводим контакты каждого друга
-                for (int i = 0; i < friends.length(); i++) {
-                    JSONObject friend = friends.getJSONObject(i);
-
-                    JSONObject contacts = friend.getJSONObject("contacts");
-
-                    String phone = contacts.getString("mobile");
-                    String email = contacts.getString("email");
-                    String skype = contacts.getString("skype");
-
-                    Log.d(LOG_TAG, "phone: " + phone);
-                    Log.d(LOG_TAG, "email: " + email);
-                    Log.d(LOG_TAG, "skype: " + skype);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
