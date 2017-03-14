@@ -1,6 +1,5 @@
 package com.example.katya.recipes;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,11 @@ import java.util.List;
 public class DataAdapter extends BaseAdapter{
     List<ItemDetails> itemDetails;
     private LayoutInflater lInflater;
+    static class ViewHolder {
+        ImageView imageView;
+        TextView txtName;
+        TextView txtDescription;
+    }
     public DataAdapter(Context context,List<ItemDetails> itemDetails ){
         this.itemDetails = itemDetails;
         lInflater = LayoutInflater.from(context);
@@ -32,11 +36,11 @@ public class DataAdapter extends BaseAdapter{
         else {
             holder = (ViewHolder) convertView.getTag();
         }
-        ItemDetails itemDetails1 = (ItemDetails) getItem(position);
+        ItemDetails itemDetails = (ItemDetails) getItem(position);
 
-        holder.txtDescription.setText(itemDetails1.getItemDescription());
-        holder.txtName.setText(itemDetails1.getItemName());
-        holder.imageView.setImageResource(itemDetails1.getImageNumber());
+        holder.txtDescription.setText(itemDetails.getItemDescription());
+        holder.txtName.setText(itemDetails.getItemName());
+        holder.imageView.setImageResource(itemDetails.getImageNumber());
 
         return convertView;
     }
@@ -52,6 +56,6 @@ public class DataAdapter extends BaseAdapter{
 
     @Override
     public long getItemId(int position) {
-        return position;//itemDetails.indexOf(getItem(position))
-    }
-}
+        return position;
+}}
+

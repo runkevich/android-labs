@@ -3,10 +3,9 @@ package com.example.katya.recipes;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by Катя on 15.11.2016.
- */
+
 public class ItemDetails implements Parcelable {
+
     private int imageNumber;
     private String itemName;
     private String itemDescription;
@@ -16,9 +15,11 @@ public class ItemDetails implements Parcelable {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
     }
+
     public int getImageNumber(){
         return imageNumber;
     }
+
     public int setImageNumber(int imageNumber){
         return imageNumber;
     }
@@ -34,6 +35,7 @@ public class ItemDetails implements Parcelable {
     public void setItemDescription(String itemDescription) {
         this.itemDescription = itemDescription;
     }
+
     public String toString() {
         return itemName + "\n" + itemDescription;
     }
@@ -68,4 +70,5 @@ public class ItemDetails implements Parcelable {
             return new ItemDetails[size];
         }
     };
+
 }
