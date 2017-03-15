@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">OOB</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="age">Ваш возраст</string>
+    <string name="man">New RadioButton</string>
+    <string name="woman">New RadioButton</string>
+</resources>

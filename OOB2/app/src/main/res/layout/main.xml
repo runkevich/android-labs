@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:layout_marginLeft="10pt"
+        android:layout_marginRight="10pt"
+        android:layout_marginTop="10pt">
+        <TextView
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5pt"
+            android:id="@+id/height"
+            android:layout_width="match_parent"
+            android:text="Рост(в см)"
+            android:textSize="20dp">
+        </TextView>
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="5pt"
+            android:id="@+id/etNum1"
+            android:layout_width="match_parent"
+            android:inputType="numberDecimal">
+        </EditText>
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2"
+        android:layout_marginLeft="10pt"
+        android:layout_marginRight="10pt"
+        android:layout_marginTop="3pt">
+        <TextView
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5pt"
+            android:id="@+id/weidth"
+            android:layout_width="match_parent"
+            android:text="Вес(в кг)"
+            android:textSize="20dp">
+        </TextView>
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="5pt"
+            android:id="@+id/etNum2"
+            android:layout_width="match_parent"
+            android:inputType="numberDecimal">
+        </EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3"
+        android:layout_marginLeft="10pt"
+        android:layout_marginRight="10pt"
+        android:layout_marginTop="3pt">
+        <TextView
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5pt"
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:text="Возраст"
+            android:textSize="20dp">
+        </TextView>
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="5pt"
+            android:id="@+id/etNum3"
+            android:layout_width="match_parent"
+            android:inputType="numberDecimal">
+        </EditText>
+    </LinearLayout>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout4"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10pt"
+        android:layout_marginRight="10pt"
+        android:layout_marginTop="3pt">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Мужчина"
+            android:id="@+id/rbMan"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Женщина"
+            android:id="@+id/rbWoman"
+            android:layout_gravity="right"
+            android:checked="false" />
+    </RadioGroup>
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt"
+        android:textSize="12pt"
+        android:layout_marginTop="3pt"
+        android:id="@+id/tvResult"
+        android:gravity="center_horizontal">
+    </TextView>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/listView"
+        android:layout_weight="0.48" />
+</LinearLayout>
